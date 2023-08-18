@@ -1,16 +1,19 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ProducerConsumer {
 
-    static final int N = 5;
-    static Producer p = new Producer();
-    static Consumer c = new Consumer();
+    static final int N = 1000;
+    static final int THREADS = 10;
     static Monitor m = new Monitor();
     public static void main(String[] args) throws Exception {
-       Thread produtor = new Thread(p,"Thread produtor");
-       Thread consumidor = new Thread(c,"Thread consumidor");
-       produtor.start();
-       consumidor.start();
+       for (int i = 0; i < THREADS;i++) {
+            Thread produtor = new Thread(new Producer(),"Thread produtor"+i);
+            Thread consumidor = new Thread(new Consumer(),"Thread consumidor"+i);
+            produtor.start();
+            consumidor.start();
+       }
     }
 
     static class Producer implements Runnable {
@@ -20,6 +23,12 @@ public class ProducerConsumer {
                 item = produceItem();
                 m.insertItem(item);
                 System.out.println("Inserindo item produtor "+item);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -35,6 +44,12 @@ public class ProducerConsumer {
             while (true) {
                 item = m.remove();
                 consumeItem(item);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -77,6 +92,7 @@ public class ProducerConsumer {
 
         private void goToSleep() {
             try {
+                System.out.println("a thread mimiu "+Thread.currentThread().getName());
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
