@@ -78,6 +78,15 @@ public class ServidorSocket2 extends JFrame {
 	private void sendData(String s) {
 		int n = 0;
 		try {
+			if (numero.getText() == null || numero.getText().equals("")) {
+				JOptionPane.showMessageDialog(
+					null,
+					"Digite um número de cliente", 
+					"Digite um número de cliente",
+					 n,
+					  null);
+				return;
+			}
 			n = Integer.parseInt(numero.getText());
 			if (n > -1 && n < nClient) {
 				clients[n].getOutput().writeObject("SERVER>>> " + s);
