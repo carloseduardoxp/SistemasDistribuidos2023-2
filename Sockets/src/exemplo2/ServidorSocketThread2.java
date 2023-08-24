@@ -60,6 +60,7 @@ public class ServidorSocketThread2 extends Thread {
 		return ativa;
 	}
 
+    @Override
 	public void run() {
         try {
 		
