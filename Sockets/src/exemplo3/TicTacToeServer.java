@@ -1,4 +1,5 @@
-package game;
+package exemplo3;
+
 import java.awt.*;
 import java.net.*;
 import java.io.*;

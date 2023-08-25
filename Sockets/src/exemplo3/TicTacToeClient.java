@@ -1,17 +1,14 @@
-package game;
+package exemplo3;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
 import java.io.*;
 import javax.swing.*;
 
-// Client class to let a user play Tic-Tac-Toe with
-// another user across a network.
-public class TicTacToeClient extends JApplet
+public class TicTacToeClient extends JFrame
                              implements Runnable {
-   /**
-	 * 
-	 */
+
    private static final long serialVersionUID = -8328202846488056890L;
    private JTextField id;
    private JTextArea display;
@@ -24,9 +21,7 @@ public class TicTacToeClient extends JApplet
    private char myMark;
    private boolean myTurn;
 
-   // Set up user-interface and board
-   public void init()
-   {
+   public TicTacToeClient() {
       display = new JTextArea( 4, 30 );
       display.setEditable( false );
       getContentPane().add( new JScrollPane( display ),
@@ -38,13 +33,7 @@ public class TicTacToeClient extends JApplet
 
       board = new Square[ 3 ][ 3 ];
 
-      // When creating a Square, the location argument to the
-      // constructor is a value from 0 to 8 indicating the
-      // position of the Square on the board. Values 0, 1,
-      // and 2 are the first row, values 3, 4, and 5 are the
-      // second row. Values 6, 7, and 8 are the third row.
-      for ( int row = 0; row < board.length; row++ )
-      {
+      for ( int row = 0; row < board.length; row++ ) {
          for ( int col = 0;
                    col < board[ row ].length; col++ ) {
             board[ row ][ col ] =
@@ -65,11 +54,12 @@ public class TicTacToeClient extends JApplet
       panel2 = new JPanel();
       panel2.add( boardPanel, BorderLayout.CENTER );
       getContentPane().add( panel2, BorderLayout.CENTER );
+
+      setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(300, 350);
+		setVisible(true);
    }
 
-   // Make connection to server and get associated streams.
-   // Start separate thread to allow this applet to
-   // continually update its output in text area display.
    public void start()
    {
       try {
@@ -113,6 +103,12 @@ public class TicTacToeClient extends JApplet
          }
       }
    }
+
+   public static void main(String args[]) {
+		TicTacToeClient app = new TicTacToeClient();
+
+		app.start();
+	}
 
    // Process messages sent to client
    public void processMessage( String s )
