@@ -1,0 +1,3 @@
+br\edu\iftm\sd\ContaHashtagsDriver.class
+br\edu\iftm\sd\ContaHashtagsReducer.class
+br\edu\iftm\sd\ContaHashtagsMapper.class
