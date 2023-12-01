@@ -1,0 +1,3 @@
+br\edu\iftm\sd\ContaDevGptMapper.class
+br\edu\iftm\sd\ContaDevGptReducer.class
+br\edu\iftm\sd\ContaDevGptDriver.class
